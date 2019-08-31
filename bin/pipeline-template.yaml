@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: tasks-pipeline
+objects:
+- apiVersion: v1
+  kind: "BuildConfig"
+  metadata:
+    name: "tasks-pipeline"
+  spec:
+    source:
+      contextDir: openshift-tasks
+      git:
+        uri: ${REPO}
+        ref: master
+    strategy:
+      type: "JenkinsPipeline"
+      jenkinsPipelineStrategy:
+        jenkinsfilePath: Jenkinsfile
+parameters:
+  - name: REPO
+    displayName: Source Repository URL 
+    description: The URL of the repository with your application source code 
+    value: https://github.com/emailtovinod/openshift-tasks.git
+    required: true 
