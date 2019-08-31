@@ -67,8 +67,8 @@ podTemplate(
        steps {
         echo "Publish to Nexus"
           sh "${mvnCmd} deploy -DskipTests=true -DaltDeploymentRepository=nexus::default::http://nexus3.gpte-hw-cicd.svc.cluster.local:8081/repository/releases"
-
       }
+    }
 
       // Build the OpenShift Image in OpenShift and tag it.
       stage('Build and Tag OpenShift Image') {
@@ -84,7 +84,7 @@ podTemplate(
    }
   }
 
-      }
+ }
 
       // Deploy the built image to the Development Environment.
       stage('Deploy to Dev') {
@@ -175,8 +175,6 @@ script {
         }
       }
     }
-  }
- }
 
       stage('Switch over to new Version') {
        steps {
@@ -194,11 +192,8 @@ script {
         }
        }
       }
-      }
+     }
     }
-  }
-}
-
 // Convenience Functions to read version from the pom.xml
 // Do not change anything below this line.
 // --------------------------------------------------------
@@ -206,3 +201,4 @@ def getVersionFromPom(pom) {
   def matcher = readFile(pom) =~ '<version>(.+)</version>'
   matcher ? matcher[0][1] : null
 }
+
