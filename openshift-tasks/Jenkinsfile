@@ -190,10 +190,7 @@ script {
 
       stage('Switch over to new Version') {
        steps {
-
         echo "Switching Production application to ${destApp}."
-       steps {
-    echo "Switching Production application to ${destApp}."
     script {
       openshift.withCluster() {
         openshift.withProject("${prodProject}") {
@@ -207,7 +204,6 @@ script {
      }
     }
    }
-  }
 // Convenience Functions to read version from the pom.xml
 // Do not change anything below this line.
 // --------------------------------------------------------
