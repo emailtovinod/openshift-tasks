@@ -14,6 +14,12 @@ podTemplate(
     )
   ]
 )
+    def mvnCmd = "mvn -s ../nexus_settings.xml"
+    def devTag  = "0.0-0"
+    def prodTag = "0.0"
+    def destApp     = "tasks-green"
+    def activeApp   = ""
+
 pipeline {
  agent {
   label "skopeo-pod"
@@ -22,22 +28,18 @@ pipeline {
 //node('skopeo-pod') {
     // Define Maven Command to point to the correct
     // settings for our Nexus installation
-    def mvnCmd = "mvn -s ../nexus_settings.xml"
-    def devTag  = "0.0-0"
-    def prodTag = "0.0"
-    def destApp     = "tasks-green"
-    def activeApp   = ""
+//    def mvnCmd = "mvn -s ../nexus_settings.xml"
+//    def devTag  = "0.0-0"
+//    def prodTag = "0.0"
+//    def destApp     = "tasks-green"
+//    def activeApp   = ""
 
 stages {
     // Checkout Source Code.
     stage('Checkout Source') {
-      steps {
-
-       checkout scm
-    
 
     // Build the Tasks Service
-    dir('openshift-tasks')
+      dir('openshift-tasks')
       steps {
             git 'https://github.com/emailtovinod/openshift-tasks.git'
             
@@ -192,7 +194,6 @@ script {
         }
       }
     }
-
       stage('Switch over to new Version') {
        steps {
         echo "Switching Production application to ${destApp}."
