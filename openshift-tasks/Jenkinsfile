@@ -22,7 +22,6 @@ pipeline {
 //node('skopeo-pod') {
     // Define Maven Command to point to the correct
     // settings for our Nexus installation
-   }
     def mvnCmd = "mvn -s ../nexus_settings.xml"
     def devTag  = "0.0-0"
     def prodTag = "0.0"
