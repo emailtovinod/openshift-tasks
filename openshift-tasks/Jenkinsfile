@@ -14,29 +14,41 @@ podTemplate(
     )
   ]
 ) {
-  node('skopeo-pod') {
+node('skopeo-pod') {
     // Define Maven Command to point to the correct
     // settings for our Nexus installation
     def mvnCmd = "mvn -s ../nexus_settings.xml"
+    def devTag  = "0.0-0"
+    def prodTag = "0.0"
+    def destApp     = "tasks-green"
+    def activeApp   = ""
 
+stages {
     // Checkout Source Code.
     stage('Checkout Source') {
-      checkout scm
-    }
+      steps {
+
+       checkout scm
+    
 
     // Build the Tasks Service
-    dir('openshift-tasks') {
+    dir('openshift-tasks')
+      steps {
+            git 'https://github.com/emailtovinod/openshift-tasks.git'
+            
       // The following variables need to be defined at the top level
       // and not inside the scope of a stage - otherwise they would not
       // be accessible from other stages.
       // Extract version from the pom.xml
+     script {
       def version = getVersionFromPom("pom.xml")
-
+      devTag  = "${version}-" + currentBuild.number
       // TBD Set the tag for the development image: version + build number
-      def devTag  = "0.0-0"
       // Set the tag for the production image: version
-      def prodTag = "0.0"
-
+      prodTag = "${version}"
+   }
+  }
+}
       // Using Maven build the war file
       // Do not run tests in this step
       stage('Build war') {
@@ -194,6 +206,8 @@ script {
       }
      }
     }
+   }
+  }
 // Convenience Functions to read version from the pom.xml
 // Do not change anything below this line.
 // --------------------------------------------------------
