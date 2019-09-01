@@ -17,8 +17,8 @@ podTemplate(
 {
 node('skopeo-pod') {
     def mvnCmd = "mvn -s ../nexus_settings.xml"
-    def devTag  = "0.0-0"
-    def prodTag = "0.0"
+//    def devTag  = "0.0-0"
+//    def prodTag = "0.0"
     def destApp     = "tasks-green"
     def activeApp   = ""
 
