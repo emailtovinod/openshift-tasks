@@ -61,20 +61,20 @@ dir('openshift-tasks') {
       // Using Maven build the war file
       // Do not run tests in this step
       stage('Build war') {
-       steps {
+  //     steps {
         echo "Building version ${devTag}"
         sh "${mvnCmd} clean package -DskipTests=true"
         }
-      }
+//      }
 
       // Using Maven run the unit tests
       stage('Unit Tests') {
-       steps {
+//       steps {
         echo "Running Unit Tests"
         sh "${mvnCmd} test"
        step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
       }
-    }
+//    }
       // Using Maven to call SonarQube for Code Analysis
       stage('Code Analysis') {
        steps {
