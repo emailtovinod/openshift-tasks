@@ -39,23 +39,23 @@ node('skopeo-pod') {
 //stages {
     // Checkout Source Code.
     stage('Checkout Source') {
-
+}
     // Build the Tasks Service
 //       steps {
-            git clone "https://github.com/emailtovinod/openshift-tasks.git"
-            dir('openshift-tasks')
+//            git clone "https://github.com/emailtovinod/openshift-tasks.git"
+dir('openshift-tasks')
       // The following variables need to be defined at the top level
       // and not inside the scope of a stage - otherwise they would not
       // be accessible from other stages.
       // Extract version from the pom.xml
-      script {
+//      script {
       def version = getVersionFromPom("pom.xml")
       devTag  = "${version}-" + currentBuild.number
       // TBD Set the tag for the development image: version + build number
       // Set the tag for the production image: version
       prodTag = "${version}"
-   }
-  }
+//   }
+//  }
 // }
       // Using Maven build the war file
       // Do not run tests in this step
@@ -216,7 +216,7 @@ script {
 // Convenience Functions to read version from the pom.xml
 // Do not change anything below this line.
 // --------------------------------------------------------
-// def getVersionFromPom(pom) {
-//  def matcher = readFile(pom) =~ '<version>(.+)</version>'
-//  matcher ? matcher[0][1] : null
-// }
+ def getVersionFromPom(pom) {
+  def matcher = readFile(pom) =~ '<version>(.+)</version>'
+  matcher ? matcher[0][1] : null
+ }
