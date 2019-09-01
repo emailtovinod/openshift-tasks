@@ -39,6 +39,7 @@ node('skopeo-pod') {
 //stages {
     // Checkout Source Code.
     stage('Checkout Source') {
+    checkout scm
 }
     // Build the Tasks Service
 //       steps {
