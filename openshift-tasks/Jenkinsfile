@@ -211,7 +211,7 @@ script {
 // Convenience Functions to read version from the pom.xml
 // Do not change anything below this line.
 // --------------------------------------------------------
-def getVersionFromPom(pom) {
+ def getVersionFromPom(pom) {
   def matcher = readFile(pom) =~ '<version>(.+)</version>'
   matcher ? matcher[0][1] : null
  }
