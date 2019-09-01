@@ -14,6 +14,8 @@ podTemplate(
     )
   ]
 )
+{
+node('skopeo-pod') {
     def mvnCmd = "mvn -s ../nexus_settings.xml"
     def devTag  = "0.0-0"
     def prodTag = "0.0"
@@ -25,7 +27,7 @@ podTemplate(
 //  label "skopeo-pod"
 // }
 // {
-node('skopeo-pod') {
+//node('skopeo-pod') {
     // Define Maven Command to point to the correct
     // settings for our Nexus installation
 //    def mvnCmd = "mvn -s ../nexus_settings.xml"
@@ -209,6 +211,7 @@ script {
       }
      }
     }
+   }
 // }
 // Convenience Functions to read version from the pom.xml
 // Do not change anything below this line.
