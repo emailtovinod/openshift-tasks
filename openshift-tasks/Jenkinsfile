@@ -44,7 +44,7 @@ node('skopeo-pod') {
     // Build the Tasks Service
 //       steps {
 //            git clone "https://github.com/emailtovinod/openshift-tasks.git"
-dir('openshift-tasks')
+dir('openshift-tasks') {
       // The following variables need to be defined at the top level
       // and not inside the scope of a stage - otherwise they would not
       // be accessible from other stages.
@@ -213,6 +213,7 @@ script {
      }
     }
    }
+ }
 // }
 // Convenience Functions to read version from the pom.xml
 // Do not change anything below this line.
