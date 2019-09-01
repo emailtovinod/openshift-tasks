@@ -41,7 +41,7 @@ node('skopeo-pod') {
     stage('Checkout Source') {
 
     // Build the Tasks Service
-       steps {
+//       steps {
             git clone "https://github.com/emailtovinod/openshift-tasks.git"
             dir('openshift-tasks')
       // The following variables need to be defined at the top level
@@ -56,7 +56,7 @@ node('skopeo-pod') {
       prodTag = "${version}"
    }
   }
- }
+// }
       // Using Maven build the war file
       // Do not run tests in this step
       stage('Build war') {
