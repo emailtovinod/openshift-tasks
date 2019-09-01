@@ -51,10 +51,10 @@ dir('openshift-tasks')
       // Extract version from the pom.xml
 //      script {
       def version = getVersionFromPom("pom.xml")
-      devTag  = "${version}-" + currentBuild.number
+      def devTag  = "${version}-" + currentBuild.number
       // TBD Set the tag for the development image: version + build number
       // Set the tag for the production image: version
-      prodTag = "${version}"
+      def prodTag = "${version}"
 //   }
 //  }
 // }
