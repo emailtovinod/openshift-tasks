@@ -93,7 +93,7 @@ dir('openshift-tasks') {
 
       // Build the OpenShift Image in OpenShift and tag it.
       stage('Build and Tag OpenShift Image') {
-       steps {
+//       steps {
         echo "Building OpenShift container image tasks:${devTag}"
         script {
          openshift.withCluster() {
@@ -105,10 +105,10 @@ dir('openshift-tasks') {
    }
   }
 
- }
+// }
       // Deploy the built image to the Development Environment.
       stage('Deploy to Dev') {
-        steps {
+//        steps {
         echo "Deploying container image to Development Project"
         script {
       // Update the Image on the Development Deployment Config
@@ -137,11 +137,11 @@ dir('openshift-tasks') {
         }
        }
       }
-     }
+//     }
 
       // Copy Image to Nexus container registry
       stage('Copy Image to Nexus container registry') {
-        steps {
+//        steps {
         echo "Copy image to Nexus container registry"
         script {
       sh "skopeo copy --src-tls-verify=false --dest-tls-verify=false --src-creds openshift:\$(oc whoami -t) --dest-creds admin:admin123 docker://docker-registry.default.svc.cluster.local:5000/${devProject}/tasks:${devTag} docker://nexus3-registry.gpte-hw-cicd.svc.cluster.local:5000/tasks:${devTag}"
@@ -152,7 +152,7 @@ dir('openshift-tasks') {
       }
     }
   }
- }
+// }
       // Blue/Green Deployment into Production
       // -------------------------------------
 //      def destApp   = "tasks-green"
