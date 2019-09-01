@@ -146,7 +146,7 @@ dir('openshift-tasks') {
 //        steps {
         echo "Copy image to Nexus container registry"
         script {
-      sh "skopeo copy --src-tls-verify=false --dest-tls-verify=false --src-creds openshift:\$(oc whoami -t) --dest-creds admin:admin123 docker://docker-registry.default.svc.cluster.local:5000/${devProject}/tasks:${devTag} docker://nexus3-registry.gpte-hw-cicd.svc.cluster.local:5000/tasks:${devTag}"
+      sh "skopeo copy --src-tls-verify=false --dest-tls-verify=false --src-creds openshift:\$(oc whoami -t) --dest-creds admin:redhat docker://docker-registry.default.svc.cluster.local:5000/${devProject}/tasks:${devTag} docker://nexus3-registry.gpte-hw-cicd.svc.cluster.local:5000/tasks:${devTag}"
       openshift.withCluster() {
         openshift.withProject("${prodProject}") {
           openshift.tag("${devProject}/tasks:${devTag}", "${devProject}/tasks:${prodTag}")
@@ -161,7 +161,7 @@ dir('openshift-tasks') {
 //      def activeApp = ""
 
       stage('Blue/Green Production Deployment') {
-        steps {
+//        steps {
         echo "Blue/Green Deployment"
 
 script {
@@ -198,9 +198,9 @@ script {
       }
     }
    }
-  }
+//  }
       stage('Switch over to new Version') {
-       steps {
+//       steps {
         echo "Switching Production application to ${destApp}."
     script {
       openshift.withCluster() {
@@ -215,7 +215,7 @@ script {
      }
     }
    }
- }
+// }
 // }
 // Convenience Functions to read version from the pom.xml
 // Do not change anything below this line.
