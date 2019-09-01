@@ -21,6 +21,8 @@ node('skopeo-pod') {
 //    def prodTag = "0.0"
     def destApp     = "tasks-green"
     def activeApp   = ""
+    def devProject  = "0df2-tasks-dev"
+    def prodProject = "0df2-tasks-prod"
 
 //pipeline {
 // agent {
