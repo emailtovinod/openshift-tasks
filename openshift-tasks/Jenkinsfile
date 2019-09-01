@@ -104,7 +104,6 @@ stages {
   }
 
  }
-
       // Deploy the built image to the Development Environment.
       stage('Deploy to Dev') {
         steps {
@@ -136,8 +135,8 @@ stages {
         }
        }
       }
-
      }
+
       // Copy Image to Nexus container registry
       stage('Copy Image to Nexus container registry') {
         steps {
@@ -194,6 +193,8 @@ script {
         }
       }
     }
+   }
+  }
       stage('Switch over to new Version') {
        steps {
         echo "Switching Production application to ${destApp}."
