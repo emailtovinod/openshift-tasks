@@ -52,6 +52,10 @@ dir('openshift-tasks') {
       // be accessible from other stages.
       // Extract version from the pom.xml
 //      script {
+        def getVersionFromPom(pom) {
+  def matcher = readFile(pom) =~ '<version>(.+)</version>'
+   matcher ? matcher[0][1] : null
+ }
       def version = getVersionFromPom("pom.xml")
       def devTag  = "${version}-" + currentBuild.number
       // TBD Set the tag for the development image: version + build number
@@ -214,7 +218,7 @@ script {
       }
      }
     }
-//   }
+   }
 // }
 // }
 // Convenience Functions to read version from the pom.xml
@@ -224,4 +228,3 @@ script {
   def matcher = readFile(pom) =~ '<version>(.+)</version>'
    matcher ? matcher[0][1] : null
  }
-}
