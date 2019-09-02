@@ -19,8 +19,8 @@ node('skopeo-pod') {
     def mvnCmd = "mvn -s ../nexus_settings.xml"
 //    def devTag  = "0.0-0"
 //    def prodTag = "0.0"
-    def destApp     = "tasks-green"
-    def activeApp   = ""
+//    def destApp     = "tasks-green"
+//    def activeApp   = ""
     def devProject  = "0df2-tasks-dev"
     def prodProject = "0df2-tasks-prod"
 
@@ -157,8 +157,8 @@ dir('openshift-tasks') {
 // }
       // Blue/Green Deployment into Production
       // -------------------------------------
-//      def destApp   = "tasks-green"
-//      def activeApp = ""
+        def destApp   = "tasks-green"
+        def activeApp = ""
 
       stage('Blue/Green Production Deployment') {
 //        steps {
@@ -220,7 +220,7 @@ script {
 // Convenience Functions to read version from the pom.xml
 // Do not change anything below this line.
 // --------------------------------------------------------
- def getVersionFromPom(pom) {
+  def getVersionFromPom(pom) {
   def matcher = readFile(pom) =~ '<version>(.+)</version>'
-  matcher ? matcher[0][1] : null
+   matcher ? matcher[0][1] : null
  }
